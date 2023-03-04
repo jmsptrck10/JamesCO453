@@ -21,7 +21,7 @@ private const double MILES_TO_METRES = 1609.34;
     public DistanceConverter()
     {
         Console.WriteLine("Distance Converter");
-        Console.WriteLine("By James Patrick Arellano");
+        Console.WriteLine("By Derek");
     }
 
     public void Run()
