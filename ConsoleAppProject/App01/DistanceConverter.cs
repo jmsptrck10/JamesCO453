@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace ConsoleAppProject.App01
 {
@@ -17,11 +17,9 @@ namespace ConsoleAppProject.App01
         private const double MILES_TO_METRES = 1609.34;
         private const double FEET_TO_METRES = 0.3048;
         private const double METRES_TO_FEET = 3.28084;
-        
 
-        // Private fields to store user inputs and conversion results
-        private string fromUnit;
-        private string toUnit;
+        private DistanceUnits fromUnit;
+        private DistanceUnits toUnit;
         private double fromDistance;
         private double toDistance;
 
@@ -54,28 +52,25 @@ namespace ConsoleAppProject.App01
 
             while (true)
             {
-        Console.WriteLine($"Enter the distance in {fromUnit}:");
-        if (!double.TryParse(Console.ReadLine(), out fromDistance))
-        {
-            Console.WriteLine("Error: Invalid distance entered");
-            continue;
-        }
-            else if (fromDistance <= 0)
-        {
-            Console.WriteLine("Error: Distance must be greater than 0");
-            continue;
+                Console.WriteLine($"Enter the distance in {fromUnit}:");
+                if (!double.TryParse(Console.ReadLine(), out fromDistance))
+                {
+                    Console.WriteLine("Error: Invalid distance entered");
+                    continue;
+                }
+                else if (fromDistance <= 0)
+                {
+                    Console.WriteLine("Error: Distance must be greater than 0");
+                    continue;
+                }
+
+                ConvertDistance();
+                PrintConversion();
+                break;
+            }
         }
 
-            ConvertDistance();
-            PrintConversion();
-            break;
-        }
-}
-
-   
-        /// Prompts the user to select a valid unit of measurement.
-        /// <returns>The selected unit as a string.</returns>
-        private string GetValidUnit()
+        private DistanceUnits GetValidUnit()
         {
             Console.WriteLine("1. Miles");
             Console.WriteLine("2. Feet");
@@ -88,13 +83,13 @@ namespace ConsoleAppProject.App01
             {
                 case "1":
                 case "miles":
-                    return "miles";
+                    return DistanceUnits.Miles;
                 case "2":
                 case "feet":
-                    return "feet";
+                    return DistanceUnits.Feet;
                 case "3":
                 case "metres":
-                    return "metres";
+                    return DistanceUnits.Metres;
                 default:
 
                     Console.WriteLine("Error: Invalid unit choice");
@@ -108,36 +103,36 @@ namespace ConsoleAppProject.App01
   
         private void ConvertDistance()
         {
-             switch (fromUnit)
+            switch (fromUnit)
             {
-                case "miles":
-                    if (toUnit == "feet")
+                case DistanceUnits.Miles:
+                    if (toUnit == DistanceUnits.Feet)
                     {
                         toDistance = fromDistance * MILES_TO_FEET;
                     }
-                    else if (toUnit == "metres")
+                    else if (toUnit == DistanceUnits.Metres)
                     {
                         toDistance = fromDistance * MILES_TO_METRES;
                     }
                     break;
 
-                case "feet":
-                   if (toUnit == "miles")
+                case DistanceUnits.Feet:
+                    if (toUnit == DistanceUnits.Miles)
                     {
                         toDistance = fromDistance / MILES_TO_FEET;
                     }
-                    else if (toUnit == "metres")
+                    else if (toUnit == DistanceUnits.Metres)
                     {
                         toDistance = fromDistance * FEET_TO_METRES;
                     }
                     break;
 
-                case "metres":
-                   if (toUnit == "miles")
+                case DistanceUnits.Metres:
+                    if (toUnit == DistanceUnits.Miles)
                     {
                         toDistance = fromDistance / MILES_TO_METRES;
                     }
-                    else if (toUnit == "feet")
+                    else if (toUnit == DistanceUnits.Feet)
                     {
                         toDistance = fromDistance * METRES_TO_FEET;
                     }
@@ -145,41 +140,39 @@ namespace ConsoleAppProject.App01
             }
         }
 
-        /// Returns the conversion factor for converting from one unit
-        /// to another unit
-        /// <param name="fromUnit">The unit to convert from.</param>
-        /// <param name="toUnit">The unit to convert to.</param>
-        /// <returns>The conversion factor
-
-
-private double GetConversionFactor(string fromUnit, string toUnit)
+/// Returns the conversion factor for converting from one unit
+/// to another unit
+/// <param name="fromUnit">The unit to convert from.</param>
+/// <param name="toUnit">The unit to convert to.</param>
+/// <returns>The conversion factor</returns>
+private double GetConversionFactor(DistanceUnits fromUnit, DistanceUnits toUnit)
 {
     switch (fromUnit)
     {
-        case "miles":
+        case DistanceUnits.Miles:
             switch (toUnit)
             {
-                case "feet":
+                case DistanceUnits.Feet:
                     return 1.0 * MILES_TO_FEET;
-                case "metres":
+                case DistanceUnits.Metres:
                     return 1.0 * MILES_TO_METRES;
             }
             break;
-        case "feet":
+        case DistanceUnits.Feet:
             switch (toUnit)
             {
-                case "miles":
+                case DistanceUnits.Miles:
                     return 1.0 / MILES_TO_FEET;
-                case "metres":
+                case DistanceUnits.Metres:
                     return 1.0 * FEET_TO_METRES;
             }
             break;
-        case "metres":
+        case DistanceUnits.Metres:
             switch (toUnit)
             {
-                case "miles":
+                case DistanceUnits.Miles:
                     return 1.0 / MILES_TO_METRES;
-                case "feet":
+                case DistanceUnits.Feet:
                     return 1.0 * METRES_TO_FEET;
             }
             break;
