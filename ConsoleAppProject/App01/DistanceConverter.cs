@@ -138,9 +138,6 @@ namespace ConsoleAppProject.App01
 
 /// Returns the conversion factor for converting from one unit
 /// to another unit
-/// <param name="fromUnit">The unit to convert from.</param>
-/// <param name="toUnit">The unit to convert to.</param>
-/// <returns>The conversion factor</returns>
 private double GetConversionFactor(DistanceUnits fromUnit, DistanceUnits toUnit)
 {
     switch (fromUnit)

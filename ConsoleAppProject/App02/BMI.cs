@@ -11,6 +11,7 @@ namespace ConsoleAppProject.App02
     /// </author>
     public class BMI
     {
+        /// Constants representing BMI categories.
         private const double UNDERWEIGHT_BMI = 18.5;
         private const double NORMAL_BMI = 24.9;
         private const double OVERWEIGHT_BMI = 29.9;
@@ -18,13 +19,15 @@ namespace ConsoleAppProject.App02
         private const double OBESE_CLASS_2_BMI = 39.9;
         private const double OBESE_CLASS_3_BMI = 40.0;
 
+        /// Fields for storing user's weight, height, and unit choice.
+
         private double weight;
         private double height;
         private string unitChoice;
 
-        /// <summary>
+       
         /// Run method to start the BMI calculator.
-        /// </summary>
+       
         public void Run()
         {
             OutputHeading();
@@ -47,6 +50,7 @@ namespace ConsoleAppProject.App02
                  
         }
 
+        /// Outputs the application heading.
 
         private void OutputHeading()
         {
@@ -54,6 +58,8 @@ namespace ConsoleAppProject.App02
             Console.WriteLine("and determines your weight status based on your BMI.");
             Console.WriteLine();
         }
+
+        /// Prompt user to choose metric or imperial units.
 
         private string ChooseUnits()
         {
@@ -78,107 +84,170 @@ namespace ConsoleAppProject.App02
             }
         }
 
+        /// Prompt user to input weight in kg or stones and pounds.
+
         private void InputWeight(string unitChoice)
+{
+    bool validInput = false;
+    while (!validInput)
+    {
+        if (unitChoice == "metric")
         {
-            if (unitChoice == "metric")
+            Console.Write("Enter your weight in kg: ");
+            string input = Console.ReadLine();
+            if (double.TryParse(input, out double result))
             {
-                Console.Write("Enter your weight in kg: ");
-                string input = Console.ReadLine();
-                weight = Convert.ToDouble(input);
+                weight = result;
+                validInput = true;
             }
-            else if (unitChoice == "imperial")
+            else
             {
-                Console.Write("Enter your weight in stones: ");
-                string stones = Console.ReadLine();
-                Console.Write("Enter your weight in pounds: ");
-                string pounds = Console.ReadLine();
-                weight = Convert.ToDouble(stones) * 14 + Convert.ToDouble(pounds);
+                Console.WriteLine("Invalid input. Please enter a valid weight in kg.");
             }
         }
+        else if (unitChoice == "imperial")
+        {
+            Console.Write("Enter your weight in stones: ");
+            string stones = Console.ReadLine();
+            Console.Write("Enter your weight in pounds: ");
+            string pounds = Console.ReadLine();
+            if (double.TryParse(stones, out double stoneResult) && double.TryParse(pounds, out double poundResult))
+            {
+                weight = stoneResult * 14 + poundResult;
+                validInput = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter valid weights in stones and pounds.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
+            break;
+        }
+    }
+}
+
+        /// Prompts the user to input their height in metres or feet and inches.
 
         private void InputHeight(string unitChoice)
+{
+    bool validInput = false;
+    while (!validInput)
+    {
+        if (unitChoice == "metric")
         {
-            if (unitChoice == "metric")
+            Console.Write("Enter your height in metres: ");
+            string input = Console.ReadLine();
+            if (double.TryParse(input, out double result))
             {
-                Console.Write("Enter your height in metres: ");
-                string input = Console.ReadLine();
-                height = Convert.ToDouble(input);
+                height = result;
+                validInput = true;
             }
-            else if (unitChoice == "imperial")
+            else
             {
-                Console.Write("Enter your height in feet: ");
-                string feet = Console.ReadLine();
-                Console.Write("Enter your height in inches: ");
-                string inches = Console.ReadLine();
-                height = Convert.ToDouble(feet) * 12 + Convert.ToDouble(inches);
+                Console.WriteLine("Invalid input. Please enter a valid height in metres.");
+            }
+        }
+        else if (unitChoice == "imperial")
+        {
+            Console.Write("Enter your height in feet: ");
+            string feet = Console.ReadLine();
+            Console.Write("Enter your height in inches: ");
+            string inches = Console.ReadLine();
+            if (double.TryParse(feet, out double feetResult) && double.TryParse(inches, out double inchResult))
+            {
+                height = feetResult * 12 + inchResult;
+                validInput = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter valid heights in feet and inches.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
+            break;
+        }
+    }
+}
+
+        /// Method that calculates the user's BMI based on
+        /// their weight and height, using the units chosen
+        /// by the user.
+
+        public double CalculateBMI(string unitChoice)
+        
+        {
+            double bmi = 0;
+            if (unitChoice == "metric")
+            
+            {
+                bmi = weight / (height * height);
+            }
+                
+                else if (unitChoice == "imperial")
+            {
+                double weightInPounds = weight * 2.20462;
+                double heightInInches = height * 39.3701;
+                    
+                bmi = (weightInPounds * 703) / (heightInInches * heightInInches);
+            }
+                    
+                else
+            {
+                Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
+            }
+                return bmi;
+        }
+        
+    /// Method that determines the user's weight status based on their BMI.
+            private string CalculateWeightStatus(double bmi)
+        {
+                if (bmi < UNDERWEIGHT_BMI)      
+            {
+                return "Underweight";
+            } 
+                else if (bmi < NORMAL_BMI)
+            {
+                return "Normal weight";
+            }
+                else if (bmi < OVERWEIGHT_BMI)
+            {
+                return "Overweight";
+            }            
+                else if (bmi < OBESE_CLASS_1_BMI)
+            {
+                return "Obese Class I (Moderately obese)";
+            }     
+                else if (bmi < OBESE_CLASS_2_BMI)
+            {
+                return "Obese Class II (Severely obese)";
+            }                
+                else if (bmi < OBESE_CLASS_3_BMI)
+            {
+                return "Obese Class III (Very severely obese)";
+            }                       
+                else
+            {
+                return "Invalid BMI value";
             }
         }
 
-        public double CalculateBMI(string unitChoice)
-{
-    double bmi = 0;
+    /// Outputs the user's BMI.
 
-    if (unitChoice == "metric")
-    {
-        bmi = weight / (height * height);
-    }
-    else if (unitChoice == "imperial")
-    {
-        double weightInPounds = weight * 2.20462;
-        double heightInInches = height * 39.3701;
-
-        bmi = (weightInPounds * 703) / (heightInInches * heightInInches);
-    }
-    else
-    {
-        Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
-    }
-
-    return bmi;
-}
-
-private string CalculateWeightStatus(double bmi)
-{
-    if (bmi < UNDERWEIGHT_BMI)
-    {
-        return "Underweight";
-    }
-    else if (bmi < NORMAL_BMI)
-    {
-        return "Normal weight";
-    }
-    else if (bmi < OVERWEIGHT_BMI)
-    {
-        return "Overweight";
-    }
-    else if (bmi < OBESE_CLASS_1_BMI)
-    {
-        return "Obese Class I (Moderately obese)";
-    }
-    else if (bmi < OBESE_CLASS_2_BMI)
-    {
-        return "Obese Class II (Severely obese)";
-    }
-    else if (bmi < OBESE_CLASS_3_BMI)
-    {
-        return "Obese Class III (Very severely obese)";
-    }
-    else
-    {
-        return "Invalid BMI value";
-    }
-}
-
-private void OutputBMI(double bmi)
-{
-    Console.WriteLine($"Your BMI is {bmi:f2}");
-}
-
-private void OutputWeightStatus(string weightStatus)
-{
+            private void OutputBMI(double bmi)
+        {
+            Console.WriteLine($"Your BMI is {bmi:f2}");
+        }
+    /// Outputs a message about weight status.
+            private void OutputWeightStatus(string weightStatus)
+        {
     Console.WriteLine($"Your weight status is {weightStatus}");
-}
+        }
 
-}
+    }
 
 }
