@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ConsoleAppProject.App01
 {
@@ -145,7 +145,6 @@ namespace ConsoleAppProject.App01
             }
         }
 
-    
         /// Returns the conversion factor for converting from one unit
         /// to another unit
         /// <param name="fromUnit">The unit to convert from.</param>
@@ -191,7 +190,6 @@ private double GetConversionFactor(string fromUnit, string toUnit)
     Console.WriteLine("Error: Invalid unit choice");
     return 0.0;
 }
-
 
 ///This method prints the conversion result to the console
         private void PrintConversion()
