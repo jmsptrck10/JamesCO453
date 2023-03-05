@@ -40,11 +40,6 @@ namespace ConsoleAppProject.App02
 
         private void OutputHeading()
         {
-            Console.WriteLine(" ------------------------");
-            Console.WriteLine("      Body Mass Index     ");
-            Console.WriteLine("          Calculator      ");
-            Console.WriteLine(" ------------------------");
-            Console.WriteLine();
             Console.WriteLine("This application calculates your BMI value");
             Console.WriteLine("and determines your weight status based on your BMI.");
             Console.WriteLine();

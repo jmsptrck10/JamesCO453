@@ -24,17 +24,13 @@ namespace ConsoleAppProject.App01
         private double toDistance;
 
 
-        /// Constructor for DistanceConverter class.
-        /// Displays a welcome message to the console.
+        /// Displays a description of the app.
 
         public DistanceConverter()
         {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-            Console.WriteLine("==========================");
-            Console.WriteLine("Distance Converter");
-            Console.WriteLine("By James Patrick Arellano");
-            Console.WriteLine("==========================");
+            Console.WriteLine("This application allows you to convert");
+            Console.WriteLine("a distance between miles, feet and metres.");
+            Console.WriteLine();
         }
 
 
