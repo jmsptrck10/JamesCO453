@@ -1,21 +1,27 @@
 ﻿using ConsoleAppProject.App01;
-using ConsoleAppProject.App03;
+using ConsoleAppProject.App02;
 using ConsoleAppProject.Helpers;
 using System;
 
 namespace ConsoleAppProject
 {
     /// <summary>
-    /// The main method in this class is called first
-    /// when the application is started.  It will be used
-    /// to start App01 to App05 for CO453 CW1
+    /// The main class for this console application. It provides a menu
+    /// of options for the user to choose from.
     /// </summary>
     /// <author>
     /// James Patrick Arellano
     /// </author>
     public static class Program
     {
-        public static void Main(string[] args)
+        private static readonly DistanceConverter converter = new DistanceConverter();
+        private static readonly BMI calculator = new BMI();
+
+        /// <summary>
+        /// The main method is called first when the application is started.
+        /// It displays a menu of options to the user and runs the selected option.
+        /// </summary>
+        public static void Main()
         {
             Console.ForegroundColor = ConsoleColor.Green;
 
@@ -25,9 +31,23 @@ namespace ConsoleAppProject
             Console.WriteLine(" =================================================");
             Console.WriteLine();
 
-            DistanceConverter converter = new DistanceConverter();
-            converter.Run();
-            
+            string[] choices = { "Distance Converter", "BMI Calculator" };
+            int choiceNo = ConsoleHelper.SelectChoice(choices);
+
+            if (choiceNo == 1)
+            {
+                ConsoleHelper.OutputHeading("Distance Converter");
+                converter.Run();
+            }
+            else if (choiceNo == 2)
+            {
+                ConsoleHelper.OutputHeading("BMI Calculator");
+                calculator.Run();
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice.");
+            }
         }
     }
 }
