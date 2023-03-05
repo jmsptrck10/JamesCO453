@@ -31,22 +31,47 @@ namespace ConsoleAppProject
             Console.WriteLine(" =================================================");
             Console.WriteLine();
 
-            string[] choices = { "Distance Converter", "BMI Calculator" };
-            int choiceNo = ConsoleHelper.SelectChoice(choices);
+            bool exit = false;
 
-            if (choiceNo == 1)
+            while (!exit)
             {
-                ConsoleHelper.OutputHeading("Distance Converter");
-                converter.Run();
-            }
-            else if (choiceNo == 2)
-            {
-                ConsoleHelper.OutputHeading("BMI Calculator");
-                calculator.Run();
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice.");
+                string[] choices = { "Distance Converter", "BMI Calculator", "Exit" };
+                int choiceNo = ConsoleHelper.SelectChoice(choices);
+
+                switch (choiceNo)
+                {
+                    case 1:
+                        ConsoleHelper.OutputHeading("Distance Converter");
+                        converter.Run();
+                        break;
+
+                    case 2:
+                        ConsoleHelper.OutputHeading("BMI Calculator");
+                        calculator.Run();
+                        break;
+
+                    case 3:
+                        exit = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+                }
+
+                if (!exit)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to the menu...");
+                    Console.ReadKey();
+                    Console.Clear();
+
+                    Console.WriteLine();
+                    Console.WriteLine(" =================================================");
+                    Console.WriteLine("    BNU CO453 Applications Programming 2022-2023! ");
+                    Console.WriteLine(" =================================================");
+                    Console.WriteLine();
+                }
             }
         }
     }
