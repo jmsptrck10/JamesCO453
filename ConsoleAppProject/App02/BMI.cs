@@ -86,41 +86,52 @@ namespace ConsoleAppProject.App02
 
         /// Prompt user to input weight in kg or stones and pounds.
 
-        private void InputWeight(string unitChoice)
+// This method takes in a string parameter to determine whether the weight input should be in metric or imperial units.
+private void InputWeight(string unitChoice)
 {
     bool validInput = false;
+    // This loop continues until valid input is received from the user.
     while (!validInput)
     {
+        // If the unit choice is metric, prompt the user for their weight in kilograms.
         if (unitChoice == "metric")
         {
             Console.Write("Enter your weight in kg: ");
             string input = Console.ReadLine();
+            // If the user enters a valid weight in kilograms, set the weight variable to that value.
             if (double.TryParse(input, out double result))
             {
                 weight = result;
                 validInput = true;
             }
+            // If the user enters an invalid weight, prompt them to enter a valid weight in kilograms.
             else
             {
                 Console.WriteLine("Invalid input. Please enter a valid weight in kg.");
             }
         }
+        // If the unit choice is imperial, prompt the user for their weight in stones and pounds.
         else if (unitChoice == "imperial")
         {
             Console.Write("Enter your weight in stones: ");
             string stones = Console.ReadLine();
             Console.Write("Enter your weight in pounds: ");
             string pounds = Console.ReadLine();
+            // If the user enters valid weights in stones and pounds, convert the weight to kilograms and set the weight variable to that value.
             if (double.TryParse(stones, out double stoneResult) && double.TryParse(pounds, out double poundResult))
             {
-                weight = stoneResult * 14 + poundResult;
+                double weightInPounds = stoneResult * 14 + poundResult;
+                double weightInKilograms = weightInPounds / 2.20462; // convert pounds to kilograms
+                weight = weightInKilograms;
                 validInput = true;
             }
+            // If the user enters invalid weights, prompt them to enter valid weights in stones and pounds.
             else
             {
                 Console.WriteLine("Invalid input. Please enter valid weights in stones and pounds.");
             }
         }
+        // If the unit choice is not "metric" or "imperial", prompt the user to enter a valid unit choice.
         else
         {
             Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
@@ -129,9 +140,11 @@ namespace ConsoleAppProject.App02
     }
 }
 
-        /// Prompts the user to input their height in metres or feet and inches.
 
-        private void InputHeight(string unitChoice)
+///method takes a unitChoice string as an argument and prompts 
+///the user to input their height in either metric or imperial units. 
+///It then converts the input to metres and sets the height variable to the converted value
+private void InputHeight(string unitChoice)
 {
     bool validInput = false;
     while (!validInput)
@@ -158,7 +171,9 @@ namespace ConsoleAppProject.App02
             string inches = Console.ReadLine();
             if (double.TryParse(feet, out double feetResult) && double.TryParse(inches, out double inchResult))
             {
-                height = feetResult * 12 + inchResult;
+                double heightInInches = feetResult * 12 + inchResult;
+                double heightInMetres = heightInInches * 0.0254; // convert inches to metres
+                height = heightInMetres;
                 validInput = true;
             }
             else
@@ -173,6 +188,7 @@ namespace ConsoleAppProject.App02
         }
     }
 }
+
 
         /// Method that calculates the user's BMI based on
         /// their weight and height, using the units chosen
