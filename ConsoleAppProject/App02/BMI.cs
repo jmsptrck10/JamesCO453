@@ -44,9 +44,14 @@ namespace ConsoleAppProject.App02
              
              if ((weightStatus == "Overweight" || weightStatus.StartsWith("Obese")) && (unitChoice == "metric" && bmi >= 23 || unitChoice == "imperial" && bmi >= 27.5))
             
-             {
+                {
                  Console.WriteLine();
-                 Console.WriteLine("If you are black, Asian, or from another minority ethnic group, " +  "you have a higher risk of developing some long-term (chronic) " +"conditions, such as type 2 diabetes.");}
+                 Console.WriteLine("If you are black, Asian, or from another minority ethnic group, " +  "you have a higher risk of developing some long-term (chronic) " +"conditions, such as type 2 diabetes.");
+
+                 Console.WriteLine();
+                 Console.WriteLine("Adults 23.0 or more are at increased risk");
+                 Console.WriteLine("Adults 27.5 or more are at high risk");
+                }
                  
         }
 
@@ -66,6 +71,7 @@ namespace ConsoleAppProject.App02
             Console.WriteLine("Please choose your units:");
             Console.WriteLine("1. Metric Units (kg, m)");
             Console.WriteLine("2. Imperial Units (stones, lbs, ft, in)");
+            Console.WriteLine();
             Console.Write("Enter your choice (1 or 2): ");
             string choice = Console.ReadLine();
 
@@ -79,6 +85,7 @@ namespace ConsoleAppProject.App02
             }
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid choice. Please enter 1 or 2.");
                 return ChooseUnits();
             }
@@ -96,6 +103,7 @@ private void InputWeight(string unitChoice)
         // If the unit choice is metric, prompt the user for their weight in kilograms.
         if (unitChoice == "metric")
         {
+            Console.WriteLine();
             Console.Write("Enter your weight in kg: ");
             string input = Console.ReadLine();
             // If the user enters a valid weight in kilograms, set the weight variable to that value.
@@ -107,12 +115,14 @@ private void InputWeight(string unitChoice)
             // If the user enters an invalid weight, prompt them to enter a valid weight in kilograms.
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid input. Please enter a valid weight in kg.");
             }
         }
         // If the unit choice is imperial, prompt the user for their weight in stones and pounds.
         else if (unitChoice == "imperial")
         {
+            Console.WriteLine();
             Console.Write("Enter your weight in stones: ");
             string stones = Console.ReadLine();
             Console.Write("Enter your weight in pounds: ");
@@ -128,12 +138,14 @@ private void InputWeight(string unitChoice)
             // If the user enters invalid weights, prompt them to enter valid weights in stones and pounds.
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid input. Please enter valid weights in stones and pounds.");
             }
         }
         // If the unit choice is not "metric" or "imperial", prompt the user to enter a valid unit choice.
         else
         {
+            Console.WriteLine();
             Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
             break;
         }
@@ -160,11 +172,13 @@ private void InputHeight(string unitChoice)
             }
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid input. Please enter a valid height in metres.");
             }
         }
         else if (unitChoice == "imperial")
         {
+            Console.WriteLine();
             Console.Write("Enter your height in feet: ");
             string feet = Console.ReadLine();
             Console.Write("Enter your height in inches: ");
@@ -178,11 +192,13 @@ private void InputHeight(string unitChoice)
             }
             else
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid input. Please enter valid heights in feet and inches.");
             }
         }
         else
         {
+            Console.WriteLine();
             Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
             break;
         }
@@ -214,6 +230,7 @@ private void InputHeight(string unitChoice)
                     
                 else
             {
+                Console.WriteLine();
                 Console.WriteLine("Invalid unit choice. Please choose either 'imperial' or 'metric'.");
             }
                 return bmi;
@@ -256,12 +273,14 @@ private void InputHeight(string unitChoice)
 
             private void OutputBMI(double bmi)
         {
+            Console.WriteLine();
             Console.WriteLine($"Your BMI is {bmi:f2}");
         }
     /// Outputs a message about weight status.
             private void OutputWeightStatus(string weightStatus)
         {
-    Console.WriteLine($"Your weight status is {weightStatus}");
+            Console.WriteLine();
+            Console.WriteLine($"Your weight status is {weightStatus}");
         }
 
     }

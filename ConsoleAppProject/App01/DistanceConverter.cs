@@ -40,6 +40,7 @@ namespace ConsoleAppProject.App01
 
         public void Run()
         {
+            Console.WriteLine();
             Console.WriteLine("Select the unit to convert from:");
             fromUnit = GetValidUnit();
 
@@ -51,11 +52,13 @@ namespace ConsoleAppProject.App01
                 Console.WriteLine($"Enter the distance in {fromUnit}:");
                 if (!double.TryParse(Console.ReadLine(), out fromDistance))
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Error: Invalid distance entered");
                     continue;
                 }
                 else if (fromDistance <= 0)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Error: Distance must be greater than 0");
                     continue;
                 }
@@ -68,10 +71,12 @@ namespace ConsoleAppProject.App01
 
         private DistanceUnits GetValidUnit()
         {
+            Console.WriteLine();
             Console.WriteLine("1. Miles");
             Console.WriteLine("2. Feet");
             Console.WriteLine("3. Metres");
 
+            Console.WriteLine();
             Console.Write("Enter your choice: ");
 
             string input = Console.ReadLine().Trim().ToLower();
@@ -88,6 +93,7 @@ namespace ConsoleAppProject.App01
                     return DistanceUnits.Metres;
                 default:
 
+                    Console.WriteLine();
                     Console.WriteLine("Error: Invalid unit choice");
                     return GetValidUnit();
             }
@@ -173,14 +179,15 @@ private double GetConversionFactor(DistanceUnits fromUnit, DistanceUnits toUnit)
 
     // If an invalid unit choice was entered, print an error message and return 0.0
     
+    Console.WriteLine();
     Console.WriteLine("Error: Invalid unit choice");
     return 0.0;
 }
 
 ///This method prints the conversion result to the console
         private void PrintConversion()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
+        {            
+            Console.WriteLine();
             Console.WriteLine($"{fromDistance} {fromUnit} is {toDistance} {toUnit}");
         }
     }
