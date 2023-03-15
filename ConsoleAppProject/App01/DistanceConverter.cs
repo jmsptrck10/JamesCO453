@@ -23,23 +23,14 @@ namespace ConsoleAppProject.App01
         private double fromDistance;
         private double toDistance;
 
-
-        /// Displays a description of the app.
-
-        public DistanceConverter()
-        {
-            Console.WriteLine("This application allows you to convert");
-            Console.WriteLine("a distance between miles, feet and metres.");
-            Console.WriteLine();
-        }
-
-
         /// Main method that runs the distance converter.
         /// Prompts the user for input, converts the distance,
         /// and prints the result to the console.
 
         public void Run()
         {
+            OutputHeading();
+            
             Console.WriteLine();
             Console.WriteLine("Select the unit to convert from:");
             fromUnit = GetValidUnit();
@@ -190,5 +181,16 @@ private double GetConversionFactor(DistanceUnits fromUnit, DistanceUnits toUnit)
             Console.WriteLine();
             Console.WriteLine($"{fromDistance} {fromUnit} is {toDistance} {toUnit}");
         }
+    
+            /// Displays a heading of the app.
+
+        private void OutputHeading()
+        {
+            Console.WriteLine("This application allows you to convert");
+            Console.WriteLine("a distance between miles, feet and metres.");
+            Console.WriteLine();
+        }
+
+
     }
 }

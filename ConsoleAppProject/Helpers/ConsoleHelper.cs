@@ -124,7 +124,7 @@ namespace ConsoleAppProject.Helpers
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.WriteLine("\n ---------------------------------");
-            Console.WriteLine($"         {heading}");
+            Console.WriteLine($"     {heading.ToUpper()}");
             Console.WriteLine("    by: James Patrick Arellano");
             Console.WriteLine(" ---------------------------------" +
                 "\n");

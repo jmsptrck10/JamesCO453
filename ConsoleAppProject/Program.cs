@@ -1,5 +1,6 @@
 ﻿using ConsoleAppProject.App01;
 using ConsoleAppProject.App02;
+using ConsoleAppProject.App03;
 using ConsoleAppProject.Helpers;
 using System;
 
@@ -16,6 +17,7 @@ namespace ConsoleAppProject
     {
         private static readonly DistanceConverter converter = new DistanceConverter();
         private static readonly BMI calculator = new BMI();
+        private static readonly StudentGrades grades = new StudentGrades();
 
         /// <summary>
         /// The main method is called first when the application is started.
@@ -35,7 +37,7 @@ namespace ConsoleAppProject
 
             while (!exit)
             {
-                string[] choices = { "Distance Converter", "BMI Calculator", "Exit" };
+                string[] choices = { "Distance Converter", "BMI Calculator", "Student Grade Calculator", "Exit" };
                 int choiceNo = ConsoleHelper.SelectChoice(choices);
 
                 switch (choiceNo)
@@ -51,6 +53,11 @@ namespace ConsoleAppProject
                         break;
 
                     case 3:
+                        ConsoleHelper.OutputHeading("Student Grade Calculator");
+                        grades.Run();
+                        break;
+
+                    case 4:
                         exit = true;
                         break;
 
