@@ -13,8 +13,9 @@ namespace ConsoleAppProject.App03
         // List of tuples to store student name, mark, and grade
         private readonly List<(string, int, Grades)> students = new();
 
+       
         // Main method to run the StudentGrades program
-    public void Run()
+        public void Run()
     {
         // Output the application heading
         OutputHeading();
@@ -29,75 +30,96 @@ namespace ConsoleAppProject.App03
             Console.WriteLine("4. Output Grade Profile");
             Console.WriteLine("5. Exit");
 
-        // Read the user's input and trim any whitespace and convert to lowercase
-            string input = Console.ReadLine().Trim().ToLower();
+        // Read the user's input and validate it
+            int option = ReadOption();
 
         // Switch statement to handle the user's input
-            switch (input)
-            {
-                case "1":
-                case "input marks":
-                    InputMarks();
-                    break;
-                case "2":
-                case "output marks":
-                    OutputMarks();
-                    break;
-                case "3":
-                case "output stats":
-                    OutputStats();
-                    break;
-                case "4":
-                case "output grade profile":
-                    OutputGradeProfile();
-                    break;
-                case "5":
-                case "exit":
-                    Console.WriteLine("\nThank you for using the Student Grades App.");
-                    return;
-                default:
-                    Console.WriteLine($"\nError: Invalid option '{input}', please try again.");
-                    break;
-            }
+                switch (option)
+        {
+            case 1:
+                InputMarks();
+                break;
+            case 2:
+                OutputMarks();
+                break;
+            case 3:
+                OutputStats();
+                break;
+            case 4:
+                OutputGradeProfile();
+                break;
+            case 5:
+                Console.WriteLine("\nThank you for using the Student Grades App.");
+                return;
+            default:
+                Console.WriteLine($"\nError: Invalid option '{option}', please try again.");
+                break;
         }
     }
+}
+
+        // Method to read and validate the user's option
+        private int ReadOption()
+    {
+        while (true)
+        {
+        // Read the user's input and trim any whitespace
+        string input = Console.ReadLine().Trim();
+
+        // Try to parse the input as an integer
+        if (!int.TryParse(input, out int option))
+        {
+            Console.WriteLine($"Error: '{input}' is not a number, please try again.");
+            continue;
+        }
+
+        // Check if the option is within the valid range of options
+        if (option < 1 || option > 5)
+        {
+            Console.WriteLine($"Error: '{option}' is not a valid option, please try again.");
+            continue;
+        }
+
+        return option;
+    }
+}
+
 
     
         // Method to input student marks
-    private void InputMarks()
-    {
-        Console.WriteLine("\nEnter marks for at least 10 students. Type 'end' to finish.");
+private void InputMarks()
+{
+    Console.WriteLine("\nEnter marks for at least 10 students. Type 'end' to finish.");
 
-        // Loop through the input process until at least 10 marks have been entered or the user types 'end'
-        while (students.Count < 10)
-        {
-            
+    // Loop through the input process until at least 10 marks have been entered or the user types 'end'
+    while (students.Count < 10)
+    {
         // Prompt the user to enter a mark for the current student
-            Console.Write($"Enter mark for Student {students.Count + 1}: ");
-            string input = Console.ReadLine().Trim().ToLower();
+        Console.Write($"Enter mark for Student {students.Count + 1}: ");
+        
+        // Read the user's input and trim any whitespace
+        string input = Console.ReadLine().Trim();
 
         // If the user types 'end', exit the loop
-            if (input == "end")
-            {
-                break;
-            }
+        if (input == "end")
+        {
+            break;
+        }
 
         // Try to parse the input as an integer, and check if it's within the valid range of marks
-            if (!int.TryParse(input, out int mark) || mark < MinMark || mark > MaxMark)
-            {
-        // Invalid input, continue the loop
-                Console.WriteLine($"Error: invalid mark '{input}', please try again.");
-                continue;
-            }
-
-        // Calculate the grade for the mark, and generate a name for the student
-            Grades grade = GetGrade(mark);
-            string name = $"Student{students.Count + 1}";
+        if (!int.TryParse(input, out int mark) || mark < MinMark || mark > MaxMark)
+        {
+            // Invalid input, continue the loop
+            Console.WriteLine($"Error: invalid mark '{input}', please try again.");
+            continue;
+        }
 
         // Add the student's information to the list
-            students.Add((name, mark, grade));
-        }
+        Grades grade = GetGrade(mark);
+        string name = $"Student{students.Count + 1}";
+        students.Add((name, mark, grade));
     }
+}
 
         // Method to output all student marks
     private void OutputMarks()
