@@ -18,6 +18,7 @@ namespace ConsoleAppProject
         private static readonly DistanceConverter converter = new DistanceConverter();
         private static readonly BMI calculator = new BMI();
         private static readonly StudentGrades grades = new StudentGrades();
+        private static readonly NetworkApp app04 = new NetworkApp();
 
         /// <summary>
         /// The main method is called first when the application is started.
@@ -37,7 +38,7 @@ namespace ConsoleAppProject
 
             while (!exit)
             {
-                string[] choices = { "Distance Converter", "BMI Calculator", "Student Grade Calculator", "Exit" };
+                string[] choices = { "Distance Converter", "BMI Calculator", "Student Grade Calculator", "Social Network App", "Exit" };
                 int choiceNo = ConsoleHelper.SelectChoice(choices);
 
                 switch (choiceNo)
@@ -58,6 +59,11 @@ namespace ConsoleAppProject
                         break;
 
                     case 4:
+                        ConsoleHelper.OutputHeading("Social Network App");
+                        app04.DisplayMenu();
+                        break;
+
+                    case 5:
                         exit = true;
                         break;
 
