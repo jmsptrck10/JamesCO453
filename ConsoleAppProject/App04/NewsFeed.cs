@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace ConsoleAppProject.App04
 {
     ///<summary>
@@ -15,62 +16,63 @@ namespace ConsoleAppProject.App04
     ///</summary>
     ///<author>
     ///  Michael Kölling and David J. Barnes
-    ///  version 0.2
+    ///  version 0.1
     ///</author> 
     public class NewsFeed
     {
-        private readonly List<Post> posts;
+        private readonly List<MessagePost> messages;
+        private readonly List<PhotoPost> photos;
 
         ///<summary>
         /// Construct an empty news feed.
         ///</summary>
         public NewsFeed()
         {
-            posts = new List<Post>();
+            messages = new List<MessagePost>();
+            photos = new List<PhotoPost>();
         }
 
+
         ///<summary>
-        /// Add a post to the news feed.
+        /// Add a text post to the news feed.
+        /// 
+        /// @param text  The text post to be added.
         ///</summary>
-        ///<param name="post">The post to add</param>
-        public void AddPost(Post post)
+        public void AddMessagePost(MessagePost message)
         {
-            posts.Add(post);
+            messages.Add(message);
         }
 
         ///<summary>
-        /// Remove a post from the news feed.
+        /// Add a photo post to the news feed.
+        /// 
+        /// @param photo  The photo post to be added.
         ///</summary>
-        ///<param name="post">The post to remove</param>
-        public void RemovePost(Post post)
+        public void AddPhotoPost(PhotoPost photo)
         {
-            posts.Remove(post);
+            photos.Add(photo);
         }
 
         ///<summary>
-        /// Display all the posts in the news feed.
+        /// Show the news feed. Currently: print the news feed details to the
+        /// terminal. (To do: replace this later with display in web browser.)
         ///</summary>
         public void Display()
         {
-            foreach (Post post in posts)
+            // display all text posts
+            foreach (MessagePost message in messages)
             {
-                post.Display();
+                message.Display();
+                Console.WriteLine();   // empty line between posts
             }
-        }
 
-        ///<summary>
-        /// Display all the posts of a particular author.
-        ///</summary>
-        ///<param name="username">The username of the author</param>
-        public void DisplayByAuthor(string username)
-        {
-            foreach (Post post in posts)
+            // display all photos
+            foreach (PhotoPost photo in photos)
             {
-                if (post.Username.Equals(username))
-                {
-                    post.Display();
-                }
+                photo.Display();
+                Console.WriteLine();   // empty line between posts
             }
         }
     }
+
 }
