@@ -1,78 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace ConsoleAppProject.App04
 {
-    ///<summary>
-    /// The NewsFeed class stores news posts for the news feed in a social network 
-    /// application.
-    /// 
-    /// Display of the posts is currently simulated by printing the details to the
-    /// terminal. (Later, this should display in a browser.)
-    /// 
-    /// This version does not save the data to disk, and it does not provide any
-    /// search or ordering functions.
-    ///</summary>
-    ///<author>
-    ///  Michael Kölling and David J. Barnes
-    ///  version 0.1
-    ///</author> 
     public class NewsFeed
     {
-        private readonly List<MessagePost> messages;
-        private readonly List<PhotoPost> photos;
+        private readonly List<Post> posts;
 
-        ///<summary>
-        /// Construct an empty news feed.
-        ///</summary>
         public NewsFeed()
         {
-            messages = new List<MessagePost>();
-            photos = new List<PhotoPost>();
+            posts = new List<Post>();
         }
 
-
-        ///<summary>
-        /// Add a text post to the news feed.
-        /// 
-        /// @param text  The text post to be added.
-        ///</summary>
         public void AddMessagePost(MessagePost message)
         {
-            messages.Add(message);
+            posts.Add(message);
         }
 
-        ///<summary>
-        /// Add a photo post to the news feed.
-        /// 
-        /// @param photo  The photo post to be added.
-        ///</summary>
         public void AddPhotoPost(PhotoPost photo)
         {
-            photos.Add(photo);
+            posts.Add(photo);
         }
 
-        ///<summary>
-        /// Show the news feed. Currently: print the news feed details to the
-        /// terminal. (To do: replace this later with display in web browser.)
-        ///</summary>
         public void Display()
         {
-            // display all text posts
-            foreach (MessagePost message in messages)
+            foreach (Post post in posts)
             {
-                message.Display();
-                Console.WriteLine();   // empty line between posts
-            }
-
-            // display all photos
-            foreach (PhotoPost photo in photos)
-            {
-                photo.Display();
+                post.Display();
                 Console.WriteLine();   // empty line between posts
             }
         }
+
+        public void DisplayPostsByAuthor(String author)
+        {
+            var filteredPosts = posts.Where(post => post.Username == author);
+
+            foreach (Post post in filteredPosts)
+            {
+                post.Display();
+                Console.WriteLine();   // empty line between posts
+            }
+        }
+
+public void RemovePostByAuthor(string author)
+{
+    var post = posts.FirstOrDefault(p => p.Username == author);
+    if (post != null)
+    {
+        posts.Remove(post);
+        Console.WriteLine("Post removed.");
     }
+    else
+    {
+        Console.WriteLine("Invalid author.");
+    }
+}
+
+// Modify AddCommentToPost method to use author instead of post index
+public void AddCommentToPost(string author, string comment)
+{
+    var post = posts.FirstOrDefault(p => p.Username == author);
+    if (post != null)
+    {
+        post.AddComment(comment);
+    }
+    else
+    {
+        Console.WriteLine("Invalid author.");
+    }
+}
+
+    public void AddCommentToPost(int index, string comment)
+    {
+        if (index >= 0 && index < posts.Count)
+        {
+            posts[index].AddComment(comment);
+        }
+        else
+        {
+            Console.WriteLine("Invalid post index.");
+        }
+    }
+
+
+public void LikePost(string author)
+{
+    var post = posts.FirstOrDefault(p => p.Username == author);
+    if (post != null)
+    {
+        post.Like();
+    }
+    else
+    {
+        Console.WriteLine("Invalid author.");
+    }
+}
+
+
+public void UnlikePost(string author)
+{
+    var post = posts.FirstOrDefault(p => p.Username == author);
+    if (post != null)
+    {
+        post.Unlike();
+    }
+    else
+    {
+        Console.WriteLine("Invalid author.");
+    }
+}
+
+
+}
+
 
 }
