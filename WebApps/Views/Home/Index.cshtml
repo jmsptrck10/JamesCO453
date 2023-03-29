@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<WebApps.Models.Post>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,3 +8,27 @@
     <h2>By James Patrick Arellano</h2>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </header>
+
+<div class="container">
+    @foreach (var post in Model)
+    {
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">@post.Username</h5>
+                <p class="card-text">@post.GetElapsedTime()</p>
+                @{
+                    if (post is WebApps.Models.PhotoPost photoPost)
+                    {
+                        <img src="@photoPost.Filename" alt="@photoPost.Caption" class="card-img-top">
+                        <p class="card-text">@photoPost.Caption</p>
+                    }
+                    else if (post is WebApps.Models.MessagePost messagePost)
+                    {
+                        <p class="card-text">@messagePost.Message</p>
+                    }
+                }
+                <p class="card-text">Likes: @post.Likes</p>
+            </div>
+        </div>
+    }
+</div>
