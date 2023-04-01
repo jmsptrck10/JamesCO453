@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace WebApps.Models
+namespace WebApp.Models
 {
     public class PhotoPost : Post
     {

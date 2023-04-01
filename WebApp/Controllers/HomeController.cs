@@ -1,25 +1,21 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using WebApps.Models;
-using Microsoft.Extensions.Logging;
-using System;
+using WebApp.Models;
 
-namespace WebApps.Controllers
+namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly NewsFeed _newsFeed;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _newsFeed = new NewsFeed();
         }
 
         public IActionResult Index()
         {
-            return View(_newsFeed.GetPosts());
+            return View();
         }
 
         public IActionResult Privacy()

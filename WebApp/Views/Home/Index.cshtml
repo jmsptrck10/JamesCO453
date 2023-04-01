@@ -1,34 +1,22 @@
-﻿@model List<WebApps.Models.Post>
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using WebApp.Models
+@model List<Post>
 
-<header class="text-center">
-    <h1 class="display-4">Social Network</h1>
-    <h2>By James Patrick Arellano</h2>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</header>
+<!DOCTYPE html>
 
-<div class="container">
+<html>
+<head>
+    <title>Social Network</title>
+</head>
+<body>
+    <h1>Social Network</h1>
+
     @foreach (var post in Model)
     {
-        <div class="card mt-3">
-            <div class="card-body">
-                <h5 class="card-title">@post.Username</h5>
-                <p class="card-text">@post.GetElapsedTime()</p>
-                @{
-                    if (post is WebApps.Models.PhotoPost photoPost)
-                    {
-                        <img src="@photoPost.Filename" alt="@photoPost.Caption" class="card-img-top">
-                        <p class="card-text">@photoPost.Caption</p>
-                    }
-                    else if (post is WebApps.Models.MessagePost messagePost)
-                    {
-                        <p class="card-text">@messagePost.Message</p>
-                    }
-                }
-                <p class="card-text">Likes: @post.Likes</p>
-            </div>
+        <div>
+            <p>Author: @post.Username</p>
+            <p>Time Elapsed: @post.GetElapsedTime()</p>
+            <p>Likes: @post.Likes people like this.</p>
         </div>
     }
-</div>
+</body>
+</html>

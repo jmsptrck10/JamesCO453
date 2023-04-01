@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace WebApps.Models
+namespace WebApp.Models
 {
     public abstract class Post
     {
@@ -55,23 +54,28 @@ namespace WebApps.Models
             }
         }
 
+        public string GetElapsedTime()
+        {
+            return FormatElapsedTime(Timestamp);
+        }
+
         public abstract void Display();
 
-
         public void DisplayCommentsWithNames()
-{
-    if (Comments.Count == 0)
-    {
-        Console.WriteLine("    No comments.");
-    }
-    else
-    {
-        Console.WriteLine($"    {Comments.Count}  comment(s):");
-        foreach (string comment in Comments)
         {
-            Console.WriteLine($"    - {comment}");
+            if (Comments.Count == 0)
+            {
+                Console.WriteLine("    No comments.");
+            }
+            else
+            {
+                Console.WriteLine($"    {Comments.Count}  comment(s):");
+                foreach (string comment in Comments)
+                {
+                    Console.WriteLine($"    - {comment}");
+                }
+            }
         }
     }
 }
-    }
-}
+

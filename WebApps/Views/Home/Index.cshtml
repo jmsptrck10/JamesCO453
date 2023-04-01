@@ -1,0 +1,34 @@
+﻿@using WebApps.Models
+@model NewsFeed
+
+<h1>News Feed</h1>
+
+@foreach (var post in Model.Posts)
+{
+    <div class="post">
+        <h3>@post
+            .Author
+        </h3>
+        <p>@post.CreatedAt.ToString("g")</p>
+        @if (post is MessagePost messagePost)
+        {
+            <p>@messagePost.Message</p>
+        }
+        else if (post is PhotoPost photoPost)
+        {
+            <img src="@photoPost.PhotoUrl" alt="Photo" />
+        }
+        <div class="likes">
+            <p>Likes: @post.Likes</p>
+        </div>
+        <div class="comments">
+            <h4>Comments</h4>
+            @foreach (var comment in post.Comments)
+            {
+                <div class="comment">
+                    <p>@comment.Author: @comment.Content</p>
+                </div>
+            }
+        </div>
+    </div>
+}

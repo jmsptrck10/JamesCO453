@@ -1,7 +1,14 @@
+using SocialNetworkWebApp.Data;
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register the PostContext with the in-memory database
+builder.Services.AddDbContext<PostContext>(options => options.UseInMemoryDatabase("SocialNetwork"));
 
 var app = builder.Build();
 

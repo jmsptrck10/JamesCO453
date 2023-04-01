@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
-namespace WebApps.Models
+namespace WebApp.Models
 {
     public class NewsFeed
     {
@@ -21,12 +21,6 @@ namespace WebApps.Models
         public void AddPhotoPost(PhotoPost photo)
         {
             posts.Add(photo);
-        }
-
-        // Add this method to get the list of posts
-        public List<Post> GetPosts()
-        {
-            return posts;
         }
 
         public void Display()
